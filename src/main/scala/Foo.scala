@@ -15,7 +15,7 @@ object Provider {
 object Foo extends App {
 
 	import scala.tools.reflect.ToolBox
-	val tb = scala.reflect.runtime.currentMirror.mkToolBox()
+	val tb = scala.reflect.runtime.currentMirror.mkToolBox(options = "-cp " + sys.props("sbt.class.directory"))
 
   import tb.u._
   tb.eval(q"Provider.testMacro[Int]")
