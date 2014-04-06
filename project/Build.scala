@@ -20,7 +20,11 @@ object MyBuild extends Build {
     file("."),
     settings = buildSettings ++ Seq(
       libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-reflect" % _),
-      libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-compiler" % _)
+      libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-compiler" % _),
+      compile in Compile := {
+        sys.props("sbt.class.directory") = (classDirectory in Compile).value.getAbsolutePath
+        (compile in Compile).value
+      }
     )
   )
 }
